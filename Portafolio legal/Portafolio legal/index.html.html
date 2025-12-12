@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Capital - Portafolio de Servicios</title>
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
+    <style>
+        /* --- FUENTES Y VARIABLES --- */
+        @font-face {
+            font-family: 'Minion Pro';
+            src: local('Minion Pro'), local('MinionPro-Regular'), url('https://db.onlinewebfonts.com/t/0114b5cb33de699ebab4036cb560344d.woff2') format('woff2');
+            font-display: swap;
+        }
+
+        :root {
+            /* Paleta de Colores Refinada */
+            --primary-dark: #072b1d;    /* Verde Bosque Profundo */
+            --primary-light: #134e36;   /* Verde un poco más claro para hovers */
+            --gold-main: #c59d32;       /* Dorado Base */
+            --gold-gradient: linear-gradient(135deg, #ab9265 0%, #cca235 50%, #ab9265 100%); /* Efecto Metálico */
+            --cream-bg: #f4f1ea;        /* Crema más suave para la vista */
+            --text-dark: #1a1a1a;       
+            --white: #ffffff;
+            --shadow-soft: 0 10px 30px rgba(7, 43, 29, 0.08);
+            --shadow-hover: 0 15px 35px rgba(197, 157, 50, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Minion Pro', 'Times New Roman', serif;
+            background-color: var(--cream-bg); 
+            color: var(--text-dark);
+            font-size: 18px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            background-color: var(--primary-dark);
+            width: 100%;
+            border-bottom: 5px solid var(--gold-main);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-wrapper {
+            width: 100%;
+            max-width: 300px; 
+            margin: 0 auto;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .logo-wrapper img {
+            max-height: 100px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            /* Si no carga la imagen, mostramos texto estético */
+            font-style: italic;
+            color: var(--gold-main);
+        }
+
+        /* Hero Title Section */
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+            background: linear-gradient(to bottom, rgba(7, 43, 29, 0.05), transparent);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+        
+        h1::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: var(--gold-gradient);
+            margin: 15px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* --- CONTENEDOR GENERAL --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+        }
+
+        /* --- TÍTULOS DE SECCIÓN --- */
+        .section-header-wrapper {
+            text-align: center;
+            margin: 60px 0 40px 0;
+        }
+
+        h2.section-header {
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+            display: inline-block;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2.section-header::before {
+            content: "§"; /* Símbolo legal decorativo */
+            display: block;
+            font-size: 1.5rem;
+            color: var(--gold-main);
+            margin-bottom: 5px;
+        }
+
+        /* --- RUP / PRECIOS --- */
+        .rup-section {
+            background-color: var(--white);
+            border-top: 5px solid var(--gold-main);
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+        }
+
+        .rup-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .rup-columns { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .rup-col-title {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 10px;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 4px;
+        }
+
+        .price-group {
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            background-color: #fafafa;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .price-group:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-color: var(--gold-main);
+        }
+
+        .company-type {
+            font-weight: bold;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            font-size: 1rem;
+            padding: 8px 15px;
+            background: rgba(204, 162, 53, 0.2); /* Gold transparente */
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .company-type i { color: var(--gold-main); }
+
+        .price-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .price-line:last-child { border-bottom: none; }
+
+        .price-line strong {
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .note {
+            margin-top: 40px;
+            background: var(--primary-dark);
+            color: #fff;
+            padding: 20px;
+            font-size: 0.95rem;
+            text-align: center;
+            border-radius: 6px;
+            border: 1px solid var(--gold-main);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* --- TARJETAS DE SERVICIOS (GRID) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 35px;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        /* Borde dorado animado superior */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-bottom: 1px solid var(--gold-main);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .card li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .card li::before {
+            content: "\f058"; /* Check icon de FontAwesome */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--gold-main);
+            position: absolute;
+            left: 0;
+            top: 1px;
+            font-size: 1em;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary-dark);
+            color: #dcdcdc;
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 80px;
+            border-top: 6px solid var(--gold-main);
+            position: relative;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            color: var(--gold-main);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer-location {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .social-icons {
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            color: var(--gold-main);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .social-icons a:hover {
+            background: var(--gold-main);
+            color: var(--primary-dark);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 15px var(--gold-main);
+        }
+
+        .copyright {
+            font-size: 0.9em;
+            opacity: 0.6;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- ANIMACIÓN DE ENTRADA (Fade In) --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Texto */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2.section-header { font-size: 1.8rem; }
+            .container { padding-bottom: 40px; }
+            .rup-section { padding: 25px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-wrapper">
+            <!-- NOTA: Asegúrate de que logo.jpg esté en la misma carpeta, 
+                 o usa una URL directa. Si falla, el estilo CSS lo manejará decentemente -->
+            <img src="logo.jpg" alt="LEGAL CAPITAL ABOGADOS" onerror="this.style.display='none'; this.parentNode.innerHTML='<h2 style=\'color:#c59d32; margin:10px 0;\'>LEGAL CAPITAL</h2>'">
+        </div>
+    </header>
+
+    <div class="hero-section fade-in">
+        <h1>Portafolio de Servicios</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- SECCIÓN RUP -->
+        <div class="section-header-wrapper fade-in">
+            <h2 class="section-header">Registro Único de Proponentes</h2>
+        </div>
+        
+        <div class="rup-section fade-in">
+            <div class="rup-columns">
+                <!-- Columna Inscripción -->
+                <div>
+                    <div class="rup-col-title"><i class="fa-solid fa-pen-to-square"></i> Inscripción</div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-shop"></i> Micro Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$2.500.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$2.900.000</strong></div>
+                    </div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-store"></i> Pequeña Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$3.200.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$3.700.000</strong></div>
+                    </div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-industry"></i> Mediana Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$4.200.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$4.700.000</strong></div>
+                    </div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-building"></i> Grande Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$5.200.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$5.700.000</strong></div>
+                    </div>
+                </div>
+
+                <!-- Columna Actualización -->
+                <div>
+                    <div class="rup-col-title"><i class="fa-solid fa-rotate"></i> Actualización</div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-shop"></i> Micro Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$1.500.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$1.900.000</strong></div>
+                    </div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-store"></i> Pequeña Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$2.000.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$2.500.000</strong></div>
+                    </div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-industry"></i> Mediana Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$3.000.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$3.500.000</strong></div>
+                    </div>
+
+                    <div class="price-group">
+                        <div class="company-type"><i class="fa-solid fa-building"></i> Grande Empresa</div>
+                        <div class="price-line"><span>Aporta contador (15 exp)</span> <strong>$4.000.000</strong></div>
+                        <div class="price-line"><span>Con contador de la firma</span> <strong>$4.500.000</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note">
+                <i class="fa-solid fa-circle-info"></i> <strong>TARIFAS ADICIONALES EXPERIENCIA:</strong><br>
+                20 Exp: $500.000 &nbsp;|&nbsp; 15 Exp: $375.000 &nbsp;|&nbsp; 10 Exp: $250.000 &nbsp;|&nbsp; 5 Exp: $125.000
+            </div>
+        </div>
+
+        <!-- SECCIÓN CORPORATIVO -->
+        <div class="section-header-wrapper fade-in">
+            <h2 class="section-header">Derecho Corporativo y Comercial</h2>
+        </div>
+        
+        <div class="services-grid">
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-gavel"></i> Constitución de Sociedades</h3>
+                <ul>
+                    <li>Sociedad colectiva.</li>
+                    <li>Sociedad en comandita simple y por acciones.</li>
+                    <li>Sociedad de responsabilidad limitada.</li>
+                    <li>Empresa unipersonal.</li>
+                    <li>Sociedad anónima (S.A).</li>
+                    <li>Sociedad por acciones simplificada (S.A.S).</li>
+                    <li>Sociedad de economía mixta.</li>
+                </ul>
+            </div>
+            
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-hand-holding-heart"></i> Entidades Sin Ánimo de Lucro</h3>
+                <ul>
+                    <li>Asociaciones, corporaciones y fundaciones.</li>
+                    <li>Federaciones y confederaciones.</li>
+                    <li>Asociaciones agropecuarias y campesinas.</li>
+                    <li>Entidades de economía solidaria.</li>
+                    <li>Cooperativas y fondos de empleados.</li>
+                    <li>Veedurías ciudadanas y JAC.</li>
+                </ul>
+            </div>
+
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-file-contract"></i> Trámites & Mutaciones</h3>
+                <ul>
+                    <li>Matrícula mercantil (Natural y Establecimiento).</li>
+                    <li>Mutaciones (Jurídica, Natural, Establecimiento).</li>
+                    <li>Sucursal de sociedad extranjera.</li>
+                    <li>Actualización RUT.</li>
+                    <li>Disolución y Liquidación de Sociedades.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECCIÓN LABORAL -->
+        <div class="section-header-wrapper fade-in">
+            <h2 class="section-header">Derecho Laboral</h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-briefcase"></i> Contratación</h3>
+                <ul>
+                    <li>Contratos a término indefinido y fijo.</li>
+                    <li>Contratos por obra o labor.</li>
+                    <li>Contratos de aprendizaje.</li>
+                    <li>Elaboración de cartas de terminación.</li>
+                    <li>Asesoría en contratación estratégica.</li>
+                </ul>
+            </div>
+            
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-building-columns"></i> Ministerio del Trabajo</h3>
+                <ul>
+                    <li>Defensa en quejas e investigaciones.</li>
+                    <li>Inscripción de Sindicatos.</li>
+                    <li>Reglamentos Internos de Trabajo.</li>
+                    <li>Permisos para menores y fueros especiales.</li>
+                    <li>Acompañamiento en Visitas de Inspección.</li>
+                    <li>Defensa ante Sanciones Administrativas.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN INMOBILIARIO -->
+        <div class="section-header-wrapper fade-in">
+            <h2 class="section-header">Inmobiliario y Especializados</h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-house-chimney"></i> Derecho Inmobiliario</h3>
+                <ul>
+                    <li>Estudio de títulos.</li>
+                    <li>Promesas y contratos de compraventa.</li>
+                    <li>Prescripción de impuestos prediales.</li>
+                    <li>Cambios de estratificación.</li>
+                    <li>Reglamento de Propiedad Horizontal.</li>
+                </ul>
+            </div>
+
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-car"></i> SIMIT y Habeas Data</h3>
+                <ul>
+                    <li>Prescripción de comparendos e impuestos vehiculares.</li>
+                    <li>Eliminación de reportes negativos en centrales de riesgo (Datacrédito/Cifin).</li>
+                </ul>
+            </div>
+
+            <div class="card fade-in">
+                <h3><i class="fa-solid fa-scale-balanced"></i> Acciones Constitucionales</h3>
+                <ul>
+                    <li>Representación en Acciones de Tutela.</li>
+                    <li>Redacción y gestión de Derechos de Petición.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-logo">Legal Capital Abogados</div>
+        <div class="footer-location"><i class="fa-solid fa-location-dot"></i> Cartagena de Indias, Colombia</div>
+        
+        <div class="social-icons">
+            <a href="https://wa.me/" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="mailto:info@legalcapital.com" title="Email"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Legal Capital Abogados. Excelencia y compromiso jurídico.</p>
+        </div>
+    </footer>
+
+    <!-- Script simple para animaciones al hacer scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
